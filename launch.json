@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Flask",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/app.py",  // Path to your main Python file
+            "args": [
+                "run"
+            ],
+            "env": {
+                "FLASK_APP": "app.py",  // Your app's main file
+                "FLASK_ENV": "development"
+            },
+            "jinja": true,
+            "console": "integratedTerminal",  // Use integrated terminal for output
+            "debugOptions": [
+                "RedirectOutput"
+            ]
+        }
+    ]
+}
