@@ -102,9 +102,10 @@
             Water: {{ resources.water }}ml <br>
             Milk: {{ resources.milk }}ml <br>
             Coffee: {{ resources.coffee }}g <br>
-            Chocolate: {{ resources.get("chocolate", 0) }}g <br>
             Money: ${{ profit }}
         </p>
+        <hr>
+        <h3>Total Profit: $<span id="total-profit">{{ profit }}</span></h3>
     </div>
 
     <footer>
@@ -130,17 +131,26 @@
                         document.getElementById("message").innerHTML = `<span class="text-danger">${data.error}</span>`;
                     } else {
                         document.getElementById("message").innerHTML = `<span class="text-success">${data.message} Change: $${data.change}</span>`;
+                        
+                        // Update resources and profit in the UI
                         const resources = data.resources;
+                        const profit = data.profit;
                         document.getElementById("resources").innerHTML = `
                             Water: ${resources.water}ml <br>
                             Milk: ${resources.milk}ml <br>
                             Coffee: ${resources.coffee}g <br>
-                            Chocolate: ${resources.get("chocolate", 0)}g <br>
-                            Money: $${data.profit}
+                            Money: $${profit}
                         `;
+                        document.getElementById("total-profit").textContent = profit;
+
+                        // Reset input fields
+                        document.getElementById("money").value = '';
                     }
                 })
-                .catch(error => console.error("Error:", error));
+                .catch(error => {
+                    loader.style.display = "none";
+                    console.error("Error:", error);
+                });
         });
     </script>
 </body>
